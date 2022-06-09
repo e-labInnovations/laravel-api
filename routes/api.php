@@ -1,5 +1,6 @@
 <?php
 
+use App\Product;
 use Illuminate\Http\Request;
 
 /*
@@ -13,8 +14,17 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/hello', function() {
-    return 'hello';
+Route::get('/products', function() {
+    return Product::all();
+});
+
+Route::post('/products', function() {
+    return Product::create([
+        'name' => 'Product 1',
+        'slug' => 'product-one',
+        'description' => 'This is the first product',
+        'price' => '49.99'
+    ]);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
